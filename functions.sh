@@ -27,3 +27,7 @@ function trim_image() {
 function save_image_from_clipboard() {
     xclip -selection clipboard -target image/png -out > Screenshot_"$(date "+%Y-%m-%d_%H-%M-%S")".png
 }
+
+function sort_python_inputs() {
+    xsel -b > sort.py && isort sort.py -d | xsel -b && rm sort.py
+}
