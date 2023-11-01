@@ -56,3 +56,8 @@ function distribute_files() {
     done
 }
 
+function svg_to_pdf() {
+    input="$1"
+    input_basename="${input%.*}"
+    rsvg-convert -f pdf -o "$input_basename".pdf "$input"
+}
