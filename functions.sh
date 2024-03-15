@@ -1,9 +1,18 @@
 #!/bin/bash
 
-function getpwd() {
-    pwd | xsel -b
+# WSL 2 Functions
+function winpst() {
+    powershell.exe Get-Clipboard | dos2unix | sed '/^$/d;s/\r$//'
+}
+function wincp() {
+    clip.exe
 }
 
+function getpwd() {
+    pwd | wincp
+}
+
+# OTHER
 function timestamp() {
     echo $(date "+%Y-%m-%d_%H-%M-%S")
 }
