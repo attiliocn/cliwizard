@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # WSL 2 Functions
-function winpst() {
+function wpt() {
     powershell.exe Get-Clipboard | dos2unix | sed '/^$/d;s/\r$//'
 }
-function wincp() {
+function wcp() {
     clip.exe
 }
 
