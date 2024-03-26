@@ -9,7 +9,7 @@ function wcp() {
 }
 
 function getpwd() {
-    pwd | wincp
+    pwd | wcp
 }
 
 # OTHER
