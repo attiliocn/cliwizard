@@ -22,8 +22,15 @@ function find_duplicates_recursive() {
     find $1 -type f -printf '%p/ %f\n' | sort -k2 | uniq -f1 --all-repeated=separate
 }
 
-function remove_pdf_comments() {
+function pdf_remove_comments() {
     pdftk \"$1\" output - uncompress | sed '/^\/Annots/d' | pdftk - output out.pdf compress
+}
+
+function pdf_rasterize(){
+    gs -dNOPAUSE -dBATCH -sDEVICE=pdfimage24 -r300 -dDownScaleFactor=2 -o "${1/.pdf/-raster.pdf}" "$1"
+}
+function pdf_invert_colors(){}{
+    gs -o "${1/.pdf/-inv.pdf}" -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -c "{1 exch sub}{1 exch sub}{1 exch sub}{1 exch sub} setcolortransfer" -f $1
 }
 
 function trim_image() {
@@ -32,7 +39,11 @@ function trim_image() {
         convert $i -trim $i
     done
 }
-
+function svg_to_pdf() {
+    input="$1"
+    input_basename="${input%.*}"
+    rsvg-convert -f pdf -o "$input_basename".pdf "$input"
+}
 function save_image_from_clipboard() {
     xclip -selection clipboard -target image/png -out > Screenshot_"$(date "+%Y-%m-%d_%H-%M-%S")".png
 }
@@ -65,8 +76,3 @@ function distribute_files() {
     done
 }
 
-function svg_to_pdf() {
-    input="$1"
-    input_basename="${input%.*}"
-    rsvg-convert -f pdf -o "$input_basename".pdf "$input"
-}
