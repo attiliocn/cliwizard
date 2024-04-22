@@ -29,7 +29,7 @@ function pdf_remove_comments() {
 function pdf_rasterize(){
     gs -dNOPAUSE -dBATCH -sDEVICE=pdfimage24 -r300 -dDownScaleFactor=2 -o "${1/.pdf/-raster.pdf}" "$1"
 }
-function pdf_invert_colors(){}{
+function pdf_invert_colors(){
     gs -o "${1/.pdf/-inv.pdf}" -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -c "{1 exch sub}{1 exch sub}{1 exch sub}{1 exch sub} setcolortransfer" -f $1
 }
 
