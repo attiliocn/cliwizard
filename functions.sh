@@ -40,7 +40,7 @@ function pdf_invert_colors(){
 function trim_image() {
     for i in $@; do
         basename=${i%.*}
-        convert $i -trim $i
+        magick $i -trim $i
     done
 }
 function svg_to_pdf() {
