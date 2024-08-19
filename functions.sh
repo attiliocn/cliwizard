@@ -17,6 +17,10 @@ function timestamp() {
     echo $(date "+%Y-%m-%d_%H-%M-%S")
 }
 
+function getts() {
+    timestamp | tr -d '\n' | wcp
+}
+
 function find_duplicates_recursive() {
     # https://stackoverflow.com/questions/16276595/how-to-find-duplicate-filenames-recursively-in-a-given-directory-bash #
     find $1 -type f -printf '%p/ %f\n' | sort -k2 | uniq -f1 --all-repeated=separate
