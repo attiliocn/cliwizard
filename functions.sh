@@ -80,3 +80,8 @@ function distribute_files() {
     done
 }
 
+function cf() {
+    file_extension="$1"
+    counts=$(find . -maxdepth 1 -name "*."$file_extension"" | wc -l)
+    echo Found "$counts" files ending with ."$file_extension"
+}
